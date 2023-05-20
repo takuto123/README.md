@@ -19,15 +19,22 @@ Laravel Framework 6.20.44
 # Installation
 If you are a mac user
 
-Install Composer
+Please enter in the terminal as follows
+
 docker-compose up -d
+
 docker-compose exec app bash
+
 composer create-project --prefer-dist laravel/laravel=6.0.* ./
 
 composer install
+
 composer update
+
 php artisan key:generate
+
 chmod 777 -R storage
+
 chmod 777 bootstrap/cache
 
 # Usage
