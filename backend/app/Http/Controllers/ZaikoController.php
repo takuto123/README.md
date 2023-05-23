@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -71,6 +71,7 @@ class ZaikoController extends Controller
             $zaiko->shosai = $inputs['shosai'];
             $zaiko->jyoukyou = $inputs['jyoukyou'];
             $zaiko->save();
+            // Zaiko::create($inputs);
          
 
 

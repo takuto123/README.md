@@ -24,7 +24,6 @@ class ZaikoRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'required|integer',
             'name' => 'required|max:20',
             'kakaku' => 'required|integer',
             'kazu' => 'required|integer',

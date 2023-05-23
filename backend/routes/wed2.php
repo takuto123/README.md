@@ -13,25 +13,25 @@
 
 // showは表示する・exeは実行する
 // 在庫一覧を表示する
-Route::get('/','ZaikoController@showList')->name('zaikos');
+// Route::get('/','ZaikoController@showList')->name('zaikos');
 
-// 在庫登録画面を表示する
-Route::get('/zaiko/create','ZaikoController@showCreate')->name('create');
-
-// 在庫登録
-Route::post('/zaiko/store','ZaikoController@exeStore')->name('store');
-
-// 詳細を表示する
-Route::get('/zaiko/{id}','ZaikoController@showDetail')->name('show');
-
-// 詳細編集画面を表示する
-Route::get('/zaiko/edit/{id}','ZaikoController@showEdit')->name('edit');
+// // 在庫登録画面を表示する
+// Route::get('/zaiko/create','ZaikoController@showCreate')->name('create');
 
 // 在庫登録
-Route::post('/zaiko/update','ZaikoController@exeUpdate')->name('update');
+// Route::post('/zaiko/store','ZaikoController@exeStore')->name('store');
 
-// 在庫削除
-Route::post('/zaiko/delete/{id}','ZaikoController@exeDelete')->name('delete');
+// // 詳細を表示する
+// Route::get('/zaiko/{id}','ZaikoController@showDetail')->name('show');
+
+// // 詳細編集画面を表示する
+// Route::get('/zaiko/edit/{id}','ZaikoController@showEdit')->name('edit');
+
+// // 在庫登録
+// Route::post('/zaiko/update','ZaikoController@exeUpdate')->name('update');
+
+// // 在庫削除
+// Route::post('/zaiko/delete/{id}','ZaikoController@exeDelete')->name('delete');
 
 
 
