@@ -35,11 +35,11 @@ Route::get('/zaiko', [ZaikoController::class, 'showList'])->name('zaikos');
 // 在庫登録画面を表示する
 Route::get('/zaiko/create', [ZaikoController::class, 'showCreate'])->name('create')->middleware('auth');
 
-//CSV出力
-Route::get('/zaiko/export-csv', [ZaikoController::class, 'export'])->name('zaikos.export')->middleware('auth');
-
 // 在庫登録
 Route::post('/zaiko/store', [ZaikoController::class, 'exeStore'])->name('store')->middleware('auth');
+
+//CSV出力
+Route::get('/zaiko/export-csv', [ZaikoController::class, 'export'])->name('zaikos.export')->middleware('auth');
 
 // 詳細を表示する
 Route::get('/zaiko/{id}', [ZaikoController::class, 'showDetail'])->name('show')->middleware('auth');

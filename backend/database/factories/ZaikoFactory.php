@@ -11,6 +11,6 @@ $factory->define(Zaiko::class, function (Faker $faker) {
         'kazu'=>$faker->randomDigitNotNull(),
         'kakaku'=>$faker->randomDigitNotNull(),
         'shosai'=>$faker->realText(),
-        'jyoukyou'=>'在庫確認'
+        'jyoukyou'=>realText(),
     ];
 });

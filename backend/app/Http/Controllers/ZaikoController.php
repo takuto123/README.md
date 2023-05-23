@@ -59,7 +59,8 @@ class ZaikoController extends Controller
     public function exeStore(ZaikoRequest $request)
     {
         $inputs = $request->validated();
-        
+        // dd($inputs['name']);
+        // var_dump(12);exit;
         DB::beginTransaction();
 
         try {
@@ -70,6 +71,8 @@ class ZaikoController extends Controller
             $zaiko->shosai = $inputs['shosai'];
             $zaiko->jyoukyou = $inputs['jyoukyou'];
             $zaiko->save();
+         
+
 
             DB::commit();
         } catch (\Throwable $e) {
