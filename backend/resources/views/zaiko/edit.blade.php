@@ -10,7 +10,7 @@
         <h2>在庫編集フォーム</h2>
         <form method="POST" action="{{ route('update') }}" onSubmit="return checkSubmit()">
             @csrf
-            <input type="hidden" name="id" value="{{ $zaiko->id}}">
+            <input type="hidden" name="id" value="{{ $zaiko->id }}">
             <div class="form-group">
                 <label for="title">
                     在庫名
@@ -19,7 +19,7 @@
                     id="name"
                     name="name"
                     class="form-control"
-                    value="{{ $zaiko->name }}"
+                    value="{{ old('name', $zaiko->name) }}"
                     type="text"
                 >
                 @error('name')

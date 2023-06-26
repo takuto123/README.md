@@ -40,7 +40,7 @@
                         <td><button type="button" class="btn btn-primary" onclick="location.href='/zaiko/edit/{{ $zaiko->id }}'">編集</button></td>
                         <form method="POST" action="{{ route('delete',$zaiko->id) }}" onSubmit="return checkDelete()">
                             @csrf
-                            <td><button type="submit" class="btn btn-primary">削除</button></td>          
+                            <td><button type="submit" class="btn btn-danger">削除</button></td>          
                         </form>
                         </td>
                     </tr>

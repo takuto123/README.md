@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +13,16 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+//在庫一覧を表示
+Route::get('/zaiko', 'API\ApiController@index');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//在庫IDを指定でその内容のみ表示
+Route::get('/zaiko/{id?}', 'API\ApiController@show');
+
+Route::post('/products', 'API\ApiController@store');
+
+Route::post('/Update/{id?}','API\ApiController@Update');
+
+
+
+

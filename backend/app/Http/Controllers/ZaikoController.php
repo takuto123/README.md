@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Zaiko; 
 use App\Http\Requests\ZaikoRequest;
 use Illuminate\Http\Response;
+use App\Http\Requests\HensyuRequest;
 
 
 
@@ -99,8 +100,11 @@ class ZaikoController extends Controller
             \Session::flash('err_msg', 'データがありません。');
             return redirect(route('zaikos'));
         }
-        return view('zaiko.edit', ['zaiko' => $zaiko]);
+        return view('zaiko.edit', compact('zaiko'));
     }
+
+
+
 
     /**
      * 在庫を更新する
@@ -110,13 +114,13 @@ class ZaikoController extends Controller
     public function exeUpdate(ZaikoRequest $request)
     {
         $inputs = $request->validated();
-    
+
         $userRole = auth()->user()->role; // ログインユーザーの役割を取得
-    
+
         $allowedChoices = [];
-    
+
         $userID = auth()->user()->id; // ログインユーザーのIDを取得
-    
+
         if ($userID === 1) { // 在庫発注社員のIDが1の場合
             $allowedChoices = ['在庫確認'];
         } elseif ($userID === 2) { // 在庫発注管理者のIDが2の場合
@@ -126,34 +130,35 @@ class ZaikoController extends Controller
         } else {
             abort(403, '許可されていないユーザーです。');
         }
-    
+
         DB::beginTransaction();
-    
+
         try {
-            $zaiko = Zaiko::find($inputs['id']);
+            $zaiko = Zaiko::find($request->id); // 変更点: $inputs['id'] から $request->id に変更
             $zaiko->name = $inputs['name'];
             $zaiko->kakaku = $inputs['kakaku'];
             $zaiko->kazu = $inputs['kazu'];
             $zaiko->shosai = $inputs['shosai'];
-    
+
             if (in_array($inputs['jyoukyou'], $allowedChoices)) {
                 $zaiko->jyoukyou = $inputs['jyoukyou'];
             } else {
                 abort(403, '許可されていない選択肢です。');
             }
-    
+
             $zaiko->save();
-    
+
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollback();
             throw $e; // エラーを再スローして詳細を表示する
         }
-    
+
         \Session::flash('err_msg', '在庫を更新しました');
         return redirect(route('zaikos'));
     }
-    
+
+        
 
     
 
@@ -223,11 +228,11 @@ class ZaikoController extends Controller
         ]);
 
 
-        
+        $id = 1; // 初期値を1に設定
         // 在庫データを書き込む
         foreach ($zaikos as $zaiko) {
             fputcsv($file, [
-                mb_convert_encoding($zaiko->id, 'SJIS', 'UTF-8'),
+                mb_convert_encoding($id++, 'SJIS', 'UTF-8'),
                 mb_convert_encoding($zaiko->name, 'SJIS', 'UTF-8'),
                 mb_convert_encoding($zaiko->kakaku, 'SJIS', 'UTF-8'),
                 mb_convert_encoding($zaiko->kazu, 'SJIS', 'UTF-8'),
@@ -247,6 +252,13 @@ class ZaikoController extends Controller
         $response = new Response($csvData, 200, $headers);
 
         return $response;
+    }
+    
+    public function index()
+    {
+        $zaikoList = Zaiko::all();
+
+        return response()->json($zaikoList);
     }
 }
 

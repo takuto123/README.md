@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ZaikoRequest extends FormRequest
+class HensyuRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ZaikoRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,20 +23,13 @@ class ZaikoRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
+        return [
+            // 'id' => 'required|integer',
             'name' => 'required|max:20',
             'kakaku' => 'required|integer',
             'kazu' => 'required|integer',
             'shosai' => 'required|max:100',
             'jyoukyou' => 'required'
         ];
-
-        // PUT や PATCH メソッドの場合のみ id フィールドをバリデーションする
-        if ($this->isMethod('PUT') || $this->isMethod('PATCH')) {
-            $rules['id'] = 'required|integer';
-        }
-
-        return $rules;
     }
-
 }
