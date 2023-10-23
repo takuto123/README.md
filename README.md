@@ -49,7 +49,6 @@ Since only three user permissions, user ID 1, 2, and 3, are prepared, it may be 
 
 
 *　takuto osawa
-* IMG
 
 # License
 
